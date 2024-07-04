@@ -1,1 +1,4 @@
-## this floder contist of what i have learned during the learning the react
+## REACT-LEARNING
+- this repo consits of  folders 
+-  what i have done during the learning react
+- 
