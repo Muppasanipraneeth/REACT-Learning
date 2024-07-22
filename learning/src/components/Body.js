@@ -6,31 +6,24 @@ import { v4 as uuidv4 } from 'uuid';
 const Body = () => {
     const [reslist, setReslist] = useState([]);
     const [showAll, setShowAll] = useState(true);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+  
 
     const fetchData = async () => {
-        try {
             const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=17.4875418&lng=78.3953462&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING");
             const json = await data.json();
-            return json.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants || [];
-        } catch (err) {
-            setError(err);
-            return [];
-        }
+            return json.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
+      
     };
 
     useEffect(() => {
         const initializeData = async () => {
             const restaurants = await fetchData();
             setReslist(restaurants);
-            setLoading(false);
         };
         initializeData();
     }, []);
 
     const toggleRestaurant = async () => {
-        setLoading(true);
         const restaurants = await fetchData();
         if (showAll) {
             setReslist(restaurants.filter((res) => res.info.avgRating > 4));
@@ -38,16 +31,9 @@ const Body = () => {
             setReslist(restaurants);
         }
         setShowAll(!showAll);
-        setLoading(false);
     };
 
-    if (loading) {
-        return <h1>Loading ......</h1>;
-    }
-
-    if (error) {
-        return <h1>There is an error: {error.message}</h1>;
-    }
+    
 
     return (
         <>
