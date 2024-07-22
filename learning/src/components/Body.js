@@ -2,6 +2,7 @@ import Restaurantcard from "./Restaurantcard";
 import SearchBar from "./SearchBar";
 import { useState, useEffect } from "react";
 import { v4 as uuidv4 } from 'uuid';
+import Shimmer from "./shimmer";
 
 const Body = () => {
     const [reslist, setReslist] = useState([]);
@@ -32,10 +33,14 @@ const Body = () => {
         }
         setShowAll(!showAll);
     };
+// if(reslist.length==0){
+//     return(<>
+//     <Shimmer></Shimmer>
+//     </>)
+// }
+    // this is conditional rendering
 
-    
-
-    return (
+    return  reslist.length==0 ?<Shimmer></Shimmer> :(// this is called the terniray operator
         <>
             <SearchBar />
             <div className="filter">
