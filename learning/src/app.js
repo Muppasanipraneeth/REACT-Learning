@@ -34,8 +34,7 @@ footer
 
 const Appcontent=()=>{
     return (<>
-        <Header>
-        </Header>
+        <Header />
         <Body></Body>
         
         </>)
@@ -46,4 +45,4 @@ const Appcontent=()=>{
 const root =ReactDOM.createRoot(document.getElementById("root"));
 root.render(<Appcontent/>);
 
-  
+

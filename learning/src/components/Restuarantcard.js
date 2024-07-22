@@ -13,7 +13,7 @@ const Restaurantcard=(props)=>{
         </div>
         <div className=" Res-items">
             <h4> {resData.name}</h4>
-            <h4> rating is {resData.avgRating} </h4>
+            <h4> rating is {resData.data.avgRating} </h4>
             <h4> time delevery {resData.data.deliveryTime} </h4>
             <h4> amount  for two {resData.data.costForTwoString}</h4>
             <h4> cusiens {resData.data.cuisines.join(",")}</h4>

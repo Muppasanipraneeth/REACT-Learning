@@ -61,3 +61,11 @@ margin: 10px;
     display: flex;
     flex-wrap: wrap;
 }
+.filter-btn{
+    margin-left: 50px;
+    cursor: pointer;
+}
+.unfilter-btn{
+    margin-left: 50px;
+    cursor: pointer;
+}
