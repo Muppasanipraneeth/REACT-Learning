@@ -9,14 +9,14 @@ const Restaurantcard=(props)=>{
 <div className ="Res-cards">
         <div >
     
-        <img className ="Res-img"src={Res_url+resData.data.cloudinaryImageId}  ></img>
+        <img className ="Res-img"src={Res_url+resData.info.cloudinaryImageId}  ></img>
         </div>
         <div className=" Res-items">
             <h4> {resData.name}</h4>
-            <h4> rating is {resData.data.avgRating} </h4>
-            <h4> time delevery {resData.data.deliveryTime} </h4>
-            <h4> amount  for two {resData.data.costForTwoString}</h4>
-            <h4> cusiens {resData.data.cuisines.join(",")}</h4>
+            <h4> rating is {resData.info.avgRating} </h4>
+            <h4> time delevery {resData.info.deliveryTime} </h4>
+            <h4> amount  for two {resData.info.costForTwoString}</h4>
+            <h4> cusiens {resData.info.cuisines.join(",")}</h4>
         </div>
     </div>
 </div>
