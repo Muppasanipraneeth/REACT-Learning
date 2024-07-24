@@ -92,3 +92,7 @@ font-size: small;
       background-size: 200% 100%;
       animation: shimmer 1.5s infinite;
 }
+.filter{
+    display: flex;
+    margin-left: 50px;
+}
