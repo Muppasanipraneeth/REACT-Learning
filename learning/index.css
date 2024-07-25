@@ -96,3 +96,7 @@ font-size: small;
     display: flex;
     margin-left: 50px;
 }
+.nav-p{
+    text-decoration: none;
+    color: inherit;
+}
