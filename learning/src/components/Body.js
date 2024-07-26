@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import Restaurantcard from "./Restaurantcard";
 import Shimmer from "./Shimmer";
-import { v4 as uuidv4 } from 'uuid';
+
+// import { v4 as uuidv4 } from 'uuid';
 
 const Body = () => {
     const [reslist, setReslist] = useState([]);
@@ -62,7 +64,11 @@ const Body = () => {
             </div>
             <div className="Res-container">
                 {reslist.map((restaurant) => (
-                    <Restaurantcard key={uuidv4()} resData={restaurant} />
+                    <Link className="res-list" key={restaurant.info.id} to={`/Restaurant/${restaurant.info.id}`}>
+                        <Restaurantcard resData={restaurant} />
+                    </Link>                   
+                        
+                    
                 ))}
             </div>
         </>

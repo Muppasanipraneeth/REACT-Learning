@@ -100,3 +100,10 @@ font-size: small;
     text-decoration: none;
     color: inherit;
 }
+.res-list{
+    text-decoration: none;
+    color: inherit;
+}
+.menu-items{
+    border: 0.2px solid rgb(247, 245, 245);
+}
