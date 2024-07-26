@@ -1,65 +1,74 @@
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import Restaurantcard from "./Restaurantcard";
-import SearchBar from "./SearchBar";
-import { useState, useEffect } from "react";
-import { v4 as uuidv4 } from 'uuid';
+import Shimmer from "./Shimmer";
+
+// import { v4 as uuidv4 } from 'uuid';
 
 const Body = () => {
     const [reslist, setReslist] = useState([]);
+    const [originalList, setOriginalList] = useState([]);
     const [showAll, setShowAll] = useState(true);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+    const [search, setSearch] = useState("");
 
     const fetchData = async () => {
-        try {
-            const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=17.4875418&lng=78.3953462&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING");
-            const json = await data.json();
-            return json.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants || [];
-        } catch (err) {
-            setError(err);
-            return [];
-        }
+        const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=17.4875418&lng=78.3953462&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING");
+        const json = await data.json();
+        console.log(json.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+        return json.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
     };
 
     useEffect(() => {
         const initializeData = async () => {
             const restaurants = await fetchData();
             setReslist(restaurants);
-            setLoading(false);
+            setOriginalList(restaurants);
         };
         initializeData();
     }, []);
 
-    const toggleRestaurant = async () => {
-        setLoading(true);
-        const restaurants = await fetchData();
+    const toggleRestaurant = () => {
         if (showAll) {
-            setReslist(restaurants.filter((res) => res.info.avgRating > 4));
+            setReslist(originalList.filter((res) => res.info.avgRating > 4));
         } else {
-            setReslist(restaurants);
+            setReslist(originalList);
         }
         setShowAll(!showAll);
-        setLoading(false);
     };
 
-    if (loading) {
-        return <h1>Loading ......</h1>;
-    }
+    const handleSearch = () => {
+        const filtered = originalList.filter((res) =>
+            res.info.name.toLowerCase().includes(search.toLowerCase())  ||res.info.cuisines.some(cuisine => cuisine.toLowerCase().includes(search.toLowerCase()))
 
-    if (error) {
-        return <h1>There is an error: {error.message}</h1>;
-    }
+        );
+        setReslist(filtered);
+    };
 
-    return (
+    return reslist.length === 0 ? (
+        <Shimmer />
+    ) : (
         <>
-            <SearchBar />
             <div className="filter">
+                <div className="Search">
+                    <input
+                        type="text"
+                        className="Search-text"
+                        value={search}
+                        onChange={(e) => setSearch(e.target.value)}
+                    />
+                    <button onClick={handleSearch}>Search</button>
+                </div>
                 <button className="filter-btn" onClick={toggleRestaurant}>
                     {showAll ? 'Top-Restaurant' : 'Show All'}
                 </button>
             </div>
             <div className="Res-container">
-                {reslist.map((restaurant, index) => (
-                    <Restaurantcard key={uuidv4()} resData={restaurant} />
+                {reslist.map((restaurant) => (
+                    <Link className="res-list" key={restaurant.info.id} to={`/Restaurant/${restaurant.info.id}`}>
+                        <Restaurantcard resData={restaurant} />
+                    </Link>                   
+                        
+                    
                 ))}
             </div>
         </>
