@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Restaurantcard from "./Restaurantcard";
 import Shimmer from "./Shimmer";
+import useOnline from "../utils/useOnline";
 
 // import { v4 as uuidv4 } from 'uuid';
 
@@ -10,7 +11,7 @@ const Body = () => {
     const [originalList, setOriginalList] = useState([]);
     const [showAll, setShowAll] = useState(true);
     const [search, setSearch] = useState("");
-
+    const online=useOnline();
     const fetchData = async () => {
         const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=17.4875418&lng=78.3953462&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING");
         const json = await data.json();
@@ -43,6 +44,12 @@ const Body = () => {
         );
         setReslist(filtered);
     };
+if(online===false){
+    return(<>
+    <h1> Please check the internet connection</h1>
+    </>)
+}
+   
 
     return reslist.length === 0 ? (
         <Shimmer />
