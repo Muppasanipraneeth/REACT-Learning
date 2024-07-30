@@ -7,6 +7,8 @@ import { FaShoppingCart } from "react-icons/fa";
 import { FaRegUser } from "react-icons/fa";
 import { IoIosArrowDown } from "react-icons/io";
 import { IoHelpBuoyOutline } from "react-icons/io5";
+import { RxCross2 } from "react-icons/rx";
+
 
 
 // Placeholder image URL
@@ -14,6 +16,7 @@ const Log_url="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBg
 
 const Navbar = () => {
   const [login, setLogin] = useState(true);
+  const [toggle,settoggle]=useState();
   const online = useOnline();
   const links = [
     {
@@ -42,25 +45,38 @@ const Navbar = () => {
   const checkLogin = () => {
     setLogin(!login);
   };
+  const showsidemenu=()=>{
+    settoggle(true);
+  }
+  const hidemenu=()=>{
+    settoggle(false);
+  }
 
-  return (
-    <div className="flex justify-between items-center p-4">
-      <div className="flex-shrink-0">
+  return (<>
+  <div className="over-lay w-full h-full fixed duration-500" onClick={hidemenu} style={{
+    opacity:toggle ? 1:0,
+    visibility:toggle ? "visible":"hidden"
+  }}>
+    <div className="w-[500px] h-full bg-white" onClick={(e)=>{e.stopPropagation()}}>
+<span className="pl-2"> <RxCross2 onClick={hidemenu} /> </span>
+    </div>
+  </div>
+    <div className="flex  items-center p-4 shadow-xl">
+      <div className="flex-shrink-0 pl-8">
         <Link to="/">
-          <img className="w-16 h-16" src={Log_url} alt="Logo" />
+          <img className="w-10 h-10 pl-1" src={Log_url} alt="Logo" />
         </Link>
       </div>
-      <div>
-      <span className="flex">  <h4>other</h4>
-      <h6>kukatpally, Hyderbad</h6></span>
+      <div className="pl-4">
+      <span className="font-bold border-b-black border-b-[1px] hover:text-[#ffa700] hover:border-b-[#ffa700] " >  other     </span>   kukatpally, Hyderbad <IoIosArrowDown  className="inline text-[#ffa700]" onClick={showsidemenu}/>
       </div>
-      <div>
+      <div className="flex ml-auto">
         <ul className="flex space-x-4">
           {links.map((link, index) => (
             <li key={index} className="flex items-center space-x-5 hover:text-[#ffa700]">
               {link.icon}
               <span>{link.name}</span>
-              <sup> {link.sup}</sup>
+              <sup className="text-[#ffa700]"> {link.sup}</sup>
 
             </li>
           ))}
@@ -68,6 +84,7 @@ const Navbar = () => {
         </ul>
       </div>
     </div>
+    </>
   );
 };
 
