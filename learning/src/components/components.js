@@ -59,7 +59,7 @@ const Components = () => {
                 </div>
             </div>
             <div className="flex overflow-hidden">
-                {category.map((cat, ind) => (
+                { Array.isArray(category) &&category.map((cat, ind) => (
                     <div
                         key={ind}
                         className="w-[150px] shrink-0"

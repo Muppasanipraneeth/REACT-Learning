@@ -5,6 +5,15 @@ import useOnline from "../utils/useOnline";
 import Cards from "../utils/Cards";
 import Components from "./components";
 import Topres from "./Toprest";
+const Res=()=>{
+    return (<>
+          
+          
+    </>)
+}
+
+
+// import { v4 as uuidv4 } from 'uuid';
 
 const Body = () => {
     const [reslist, setReslist] = useState([]);
@@ -13,10 +22,11 @@ const Body = () => {
     const [search, setSearch] = useState("");
     const online=useOnline();
     const fetchData = async () => {
-        const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=17.4875418&lng=78.3953462&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING");
-        const json = await data.json();
-        console.log(json.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
-        return json.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
+        const res = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=17.4875418&lng=78.3953462&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING");
+        const data = await res.json();
+        console.log(data?.data?.cards[0]);
+        console.log(data?.data?.cards[0]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+        return data?.data?.cards[0]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
     };
 
     useEffect(() => {
@@ -51,15 +61,13 @@ if(online===false){
 }
    
 
-    return reslist.length === 0 ? (
-        <Shimmer />
-    ) : (
+    return(
         <><div>
 <Components />
 <Topres />
 <div>
 <div className=" ml-32 grid grid-cols-4 gap-3">
-                {reslist.map((restaurant) => (
+                 {Array.isArray(reslist) &&reslist.map((restaurant) => (
                     <Link className="res-list" key={restaurant.info.id} to={`/Restaurant/${restaurant.info.id}`}>
                     <Cards res={restaurant}/>
                     </Link>                   
