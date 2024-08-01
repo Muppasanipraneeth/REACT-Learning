@@ -8,6 +8,7 @@ import Error from "./components/Error";
 import ResMenu from "./components/RestaurantMenu";
 import {createBrowserRouter,RouterProvider,Outlet} from "react-router-dom"
 import Components from "./components/components";
+import Topres from "./components/Toprest";
 
 /* 
 Header 
@@ -41,7 +42,7 @@ footer
 const Appcontent=()=>{
     return (<>
         <Header />
-        <Components />
+        
         <Outlet />
         
         </>)

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import Restaurantcard from "./Restaurantcard";
 import Shimmer from "./Shimmer";
 import useOnline from "../utils/useOnline";
-
-// import { v4 as uuidv4 } from 'uuid';
+import Cards from "../utils/Cards";
+import Components from "./components";
+import Topres from "./Toprest";
 
 const Body = () => {
     const [reslist, setReslist] = useState([]);
@@ -54,8 +54,27 @@ if(online===false){
     return reslist.length === 0 ? (
         <Shimmer />
     ) : (
-        <>
-            <div className="filter">
+        <><div>
+<Components />
+<Topres />
+<div>
+<div className=" ml-32 grid grid-cols-4 gap-3">
+                {reslist.map((restaurant) => (
+                    <Link className="res-list" key={restaurant.info.id} to={`/Restaurant/${restaurant.info.id}`}>
+                    <Cards res={restaurant}/>
+                    </Link>                   
+                        
+                    
+                ))}
+            </div>
+</div>
+</div>
+        </>
+    );
+};
+
+export default Body;
+{/**  <div className="filter">
                 <div className="Search">
                     <input
                         type="text"
@@ -68,18 +87,4 @@ if(online===false){
                 <button className="filter-btn" onClick={toggleRestaurant}>
                     {showAll ? 'Top-Restaurant' : 'Show All'}
                 </button>
-            </div>
-            <div className="Res-container">
-                {reslist.map((restaurant) => (
-                    <Link className="res-list" key={restaurant.info.id} to={`/Restaurant/${restaurant.info.id}`}>
-                        <Restaurantcard resData={restaurant} />
-                    </Link>                   
-                        
-                    
-                ))}
-            </div>
-        </>
-    );
-};
-
-export default Body;
+            </div> */}
