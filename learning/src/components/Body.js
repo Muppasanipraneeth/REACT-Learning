@@ -24,9 +24,9 @@ const Body = () => {
     const fetchData = async () => {
         const res = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=17.4875418&lng=78.3953462&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING");
         const data = await res.json();
-        console.log(data?.data?.cards[0]);
-        console.log(data?.data?.cards[0]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
-        return data?.data?.cards[0]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
+        console.log(data?.data?.cards[1]);
+        console.log(data?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+        return data?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
     };
 
     useEffect(() => {
