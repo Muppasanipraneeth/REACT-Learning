@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import {useResInfo} from "../utils/useResInfo"
 import useResMenu from "../utils/useResMenu";
 import Rating from "../utils/Rating";
+import Menulist from "./Menudetails";
 const MenuItem = (props) => {
    const { name ,description,rating ,className}=props;
     return (
@@ -20,6 +21,7 @@ const ResMenu = () => {
     const { id } = useParams();
     const menu=useResInfo(id);
     const menuCards=useResMenu(id);
+    console.log(menuCards);
     const renderRestaurantInfo = (info) => (
         <div className="bg-white  justify-center items-center ml-32">
             <div className="font-extrabold text-[24px] p-4 ml-5 "> {info.name} </div>
@@ -63,9 +65,9 @@ const ResMenu = () => {
   </div>
     </div>            {menu ? (
                 <>
-                    {renderRestaurantInfo(menu)}
-                    {menuCards.map((item, index) => (
-                        <MenuItem className="ml-32   shadow-gray-300 shadow-lg  mr-32 p-10 " key={index} name={item.card.info.name} description={item.card.info.description}  rating={item.card.info.ratings.aggregatedRating.rating}/>
+                       {renderRestaurantInfo(menu)}
+                    {menuCards.map((res, ind) => (
+                        <Menulist key={ind} {...res}/>
                     ))}
                 </>
             ) : (
