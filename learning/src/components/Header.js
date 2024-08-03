@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState,useContext } from "react";
 import { Link } from "react-router-dom";
 import useOnline from "../utils/useOnline";
 import { CiSearch } from "react-icons/ci";
@@ -8,6 +8,7 @@ import { FaRegUser } from "react-icons/fa";
 import { IoIosArrowDown } from "react-icons/io";
 import { IoHelpBuoyOutline } from "react-icons/io5";
 import { RxCross2 } from "react-icons/rx";
+import Usercontext from "../utils/Usercontext";
 
 
 
@@ -18,6 +19,9 @@ const Navbar = () => {
   const [login, setLogin] = useState(true);
   const [toggle,settoggle]=useState();
   const online = useOnline();
+
+  const {username}=useContext(Usercontext);
+  console.log(username);
   const links = [
     {
       name: "search",
@@ -39,6 +43,9 @@ const Navbar = () => {
     {
       name: "cart",
       icon: <FaShoppingCart />
+    },{
+      name:username
+
     }
   ];
 

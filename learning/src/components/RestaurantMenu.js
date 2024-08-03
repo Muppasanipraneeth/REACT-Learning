@@ -18,10 +18,10 @@ const MenuItem = (props) => {
     );
 };
 const ResMenu = () => {
+    const [showIndex,setshowIndex]=useState(0);
     const { id } = useParams();
     const menu=useResInfo(id);
     const menuCards=useResMenu(id);
-    console.log(menuCards);
     const renderRestaurantInfo = (info) => (
         <div className="bg-white  justify-center items-center ml-32">
             <div className="font-extrabold text-[24px] p-4 ml-5 "> {info.name} </div>
@@ -67,7 +67,7 @@ const ResMenu = () => {
                 <>
                        {renderRestaurantInfo(menu)}
                     {menuCards.map((res, ind) => (
-                        <Menulist key={ind} {...res}/>
+                        <Menulist key={ind} {...res} showItems={ind==showIndex?true:false} setshowIndex={()=>setshowIndex(ind)}/>
                     ))}
                 </>
             ) : (

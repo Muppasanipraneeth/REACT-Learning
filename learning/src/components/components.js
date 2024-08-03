@@ -10,7 +10,6 @@ const Components = () => {
         const data = await fetch("http://localhost:5000/categories");
         const json = await data.json();
         setCategory(json);
-        console.log(json);
     };
 
     const right = () => {

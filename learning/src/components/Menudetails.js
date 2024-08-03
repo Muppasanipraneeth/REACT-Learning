@@ -1,38 +1,34 @@
 import { MdArrowDropDown } from "react-icons/md";
-import { useState } from "react";
 import Menucard from "./Menucard";
 
 const Menulist=(props)=>{
-    const [drop,setdrop]=useState(false);
+    // const [drop,setdrop]=useState(false);
+    const{showItems,setshowIndex}=props;
     const {title,itemCards}=props.card.card;
-    
-    console.log(props);
-    console.log(" this is called");
     const Drop=()=>{
-        console.log("drop called");
-        if(drop){
-            setdrop(false);
-        }else{
-            setdrop(true)
-        }
+        setshowIndex();
+        // console.log("drop called");
+        // if(drop){
+        //     setdrop(false);
+        // }else{
+        //     setdrop(true)
+        // }
     }
     return(<>
     
-    <div className="justify-center items-center border-5 shadow-sm ml-32 mr-20">
-        <button className=" ml-32">
+    <div className="justify-center items-center border-5 shadow-sm ml-32 mr-20" onClick={Drop} >
         <div className="font-bold flex  justify-between ">
-            <span> {title} ({itemCards.length})</span>
+            <span className="ml-32"> {title} ({itemCards.length})</span>
     
-            <span onClick={Drop} >
+            <span className="mr-48" >
                 <MdArrowDropDown className="inline" />
             </span>
 
         </div>
-        {drop?<div>
+        {showItems?<div>
             {itemCards.map((res,ind)=>(<Menucard  res={res.card.info}/>))}
         </div>:<div></div>}
 
-        </button>
 
     </div>
     </>)

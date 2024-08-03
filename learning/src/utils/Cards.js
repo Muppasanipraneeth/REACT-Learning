@@ -9,7 +9,7 @@ const Cards = ({ res }) => {
       <div className="h-[182px] rounded-[10px] overflow-hidden relative">
         <img
           src={Res_url + res.info.cloudinaryImageId}
-          className="object-cover w-full h-full"
+          className="c"
           alt="Image"
         />
        {res?.info?.aggregatedDiscountInfoV3 ? (

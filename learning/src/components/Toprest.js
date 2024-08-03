@@ -12,8 +12,6 @@ const Topres = () => {
             const data = await res.json();
             const list1 = data.data?.cards?.[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants || [];
             setList(list1);
-            console.log(list1);
-            console.log("top");
         } catch (error) {
             console.error("Failed to fetch data:", error);
         }
