@@ -8,13 +8,19 @@ import Error from "./components/Error";
 import ResMenu from "./components/RestaurantMenu";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import Footer from "./components/footer"; // Ensure the case matches the file name
-
+import Appstore from "./utils/Appstore";
+import { Provider } from "react-redux";
+import Cart from "./components/Cart";
+import LoginPage from "./components/loginpage";
 const AppContent = () => {
   return (
+
     <>
+    <Provider store={Appstore}>
       <Header />
       <Outlet />
       <Footer />
+      </Provider>
     </>
   );
 };
@@ -39,6 +45,14 @@ const appRouter = createBrowserRouter([
       {
         path: "/restaurant/:id",
         element: <ResMenu />,
+      },
+      {
+        path: "/Cart",
+        element: <Cart />,
+      },
+      {
+        path: "/Login",
+        element: <LoginPage />,
       },
     ],
     errorElement: <Error />,
