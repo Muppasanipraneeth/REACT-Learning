@@ -9,7 +9,7 @@ import { IoIosArrowDown } from "react-icons/io";
 import { IoHelpBuoyOutline } from "react-icons/io5";
 import { RxCross2 } from "react-icons/rx";
 import Usercontext from "../utils/Usercontext";
-
+import { useSelector } from "react-redux";
 
 
 // Placeholder image URL
@@ -19,32 +19,42 @@ const Navbar = () => {
   const [login, setLogin] = useState(true);
   const [toggle,settoggle]=useState();
   const online = useOnline();
+  const cart=useSelector((store)=>store.cart.items);
+  console.log(cart);
+  
 
   const {username}=useContext(Usercontext);
   console.log(username);
   const links = [
     {
       name: "search",
-      icon: <CiSearch />
+      icon: <CiSearch />,
+      to:"/Search"
     },
     {
       name: "offers",
       icon: <BiSolidOffer />,
-      sup:"new"
+      sup:"new",
+      to:"/Search"
     },
     {
         name: "help",
-        icon: <IoHelpBuoyOutline/>
+        icon: <IoHelpBuoyOutline/>,
+        to:"/Search"
       },
     {
       name: "login",
-      icon: <FaRegUser />
+      icon: <FaRegUser />,
+      to:"/Login"
     },
     {
       name: "cart",
-      icon: <FaShoppingCart />
+      icon: <FaShoppingCart />,
+      sup:cart.length,
+      to:"/Cart"
     },{
-      name:username
+      name:username,
+      to:"/user"
 
     }
   ];
@@ -82,7 +92,9 @@ const Navbar = () => {
           {links.map((link, index) => (
             <li key={index} className="flex items-center space-x-5 hover:text-[#ffa700]">
               {link.icon}
+              <Link to={link.to}>
               <span>{link.name}</span>
+              </Link>
               <sup className="text-[#ffa700]"> {link.sup}</sup>
 
             </li>
