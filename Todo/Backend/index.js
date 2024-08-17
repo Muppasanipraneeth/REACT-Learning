@@ -3,18 +3,13 @@ const { updateTodo, createTodo } = require("./type");
 const mongoose = require("mongoose");
 const { todos } = require("./db");
 const cors=require("cors");
-
 const app = express();
 const port = 3000;
-
 app.use(express.json());
 app.use(cors());
-
-
 app.listen(port,()=>{
     console.log(" this is port is working ");
 })
-
 async function main() {
   try {
     await mongoose.connect("mongodb://127.0.0.1:27017/todos");
@@ -28,8 +23,9 @@ main();
 
 app.post("/todo", async (req, res) => {
   const createPayload = req.body;
-  const parsePayload = createTodo.safeParse(createPayload);
-  
+  const parsePayload = createTodo. (createPayload);
+  console.log(createPayload);
+  console.log(parsePayload);
   if (!parsePayload.success) {
     res.status(411).json({ msg: "You have given the wrong input" });
     return;

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useState } from 'react';
 
-const CreateTodoTodo = () => {
+const CreateTodo = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
 
@@ -52,4 +52,4 @@ const CreateTodoTodo = () => {
   );
 }
 
-export default CreateTodoTodo;
+export default CreateTodo;
