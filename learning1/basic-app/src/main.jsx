@@ -1,8 +1,10 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-// import App from './App.jsx'
+import App from './App.jsx'
 import './index.css'
-import Comments from './Comments'
+// import Count from './Count'
+// import Quote from './Quotes'
+// import Comments from './Comments'
 // import LoginPage from './LoginPage'
 // import Lottory from './Lotorry'
 // import TodoList from './Todo'
@@ -14,14 +16,16 @@ import Comments from './Comments'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    {/* <App />
-    <Movie /> */}
+    {/* <Movie /> */} 
     {/* <Form />
     <Like />
     <Apps /> */}
     {/* <TodoList/> */}
     {/* <Lottory/> */}
     {/* <LoginPage /> */}
-    <Comments />
+    {/* <Comments /> */}
+    {/* <Count /> */}
+    {/* <Quote/> */}
+    <App />
   </StrictMode>,
 )
