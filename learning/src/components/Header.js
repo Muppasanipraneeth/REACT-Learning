@@ -21,8 +21,6 @@ const Navbar = () => {
   const online = useOnline();
   const cart=useSelector((store)=>store.cart.items);
   console.log(cart);
-  
-
   const {username}=useContext(Usercontext);
   console.log(username);
   const links = [
